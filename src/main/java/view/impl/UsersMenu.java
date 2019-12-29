@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static dao.UserDao.users;
 
 public class UsersMenu {
-    public static void main(String[] args) {
+    public void runMenu() {
 
         for (model.User user : users) {
             System.out.println(user.toString());
@@ -36,7 +36,7 @@ public class UsersMenu {
         }
     }
 
-    public static int showMainMenu() {
+    public int showMainMenu() {
         System.out.println("Select menu item:");
         System.out.println("1. Block user");
         System.out.println("2. Unblock user");
@@ -47,18 +47,18 @@ public class UsersMenu {
         return scanner.nextInt();
     }
 
-    public static void blockUsersMenu(boolean block) {
+    public void blockUsersMenu(boolean block) {
         List<User> users;
         if (block) {
             System.out.println("Select user to block");
         } else {
             System.out.println("Select user to unblock");
         }
-        users = UserDao.getBlockedUsersList(block);
+        users = UserDao.getBlockedUsersList(!block);
         Map<Integer, Integer> usersId = new HashMap<>();
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println(i + 1 + ". " + users.get(i).getName());
-            usersId.put(i + 1, users.get(i).getId());
+        for (int i = 1; i <= users.size(); i++) {
+            System.out.println(i + ". " + users.get(i - 1).getName());
+            usersId.put(i, users.get(i - 1).getId());
         }
         System.out.println("0. To exit");
         Scanner scanner = new Scanner(System.in);
@@ -68,6 +68,11 @@ public class UsersMenu {
         }
         try {
             UserService.blockUser(usersId.get(input), block);
+            if (block) {
+                System.out.println(users.get(input - 1).getName() + " blocked successful");
+            } else {
+                System.out.println(users.get(input - 1).getName() + " unblocked successful");
+            }
         } catch (NullPointerException e) {
             System.out.println("User not found");
         }
