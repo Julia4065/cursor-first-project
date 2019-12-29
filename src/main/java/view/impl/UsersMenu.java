@@ -3,6 +3,8 @@ package view.impl;
 import dao.UserDao;
 import service.UserService;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static dao.UserDao.users;
@@ -23,20 +25,24 @@ public class UsersMenu {
         int mainMenuInput = myInput.nextInt();
         if (mainMenuInput == 1) {
             System.out.println("Select user to block");
+            Map<Integer, Integer> usersId = new HashMap<>();
             for (int i = 0; i < UserDao.getUnBlockedUsersList().size(); i++) {
                 System.out.println(i + 1 + ". " + UserDao.getUnBlockedUsersList().get(i).getName());
+                usersId.put(i + 1, UserDao.getUnBlockedUsersList().get(i).getId());
             }
             Scanner blockUser = new Scanner(System.in);
             int userToBlock = blockUser.nextInt();
-            UserService.blockUser(userToBlock - 1);
+            UserService.blockUser(usersId.get(userToBlock));
         } else if (mainMenuInput == 2) {
             System.out.println("Select user to unblock");
+            Map<Integer, Integer> usersId = new HashMap<>();
             for (int i = 0; i < UserDao.getBlockedUsersList().size(); i++) {
                 System.out.println(i + 1 + ". " + UserDao.getBlockedUsersList().get(i).getName());
+                usersId.put(i + 1, UserDao.getBlockedUsersList().get(i).getId());
             }
             Scanner unBlockUser = new Scanner(System.in);
             int userToUnBlock = unBlockUser.nextInt();
-            UserService.unBlockUser(userToUnBlock - 1);
+            UserService.unBlockUser(usersId.get(userToUnBlock));
         } else if (mainMenuInput == 3) {
             System.out.println("Select user to sent the message");
         }
