@@ -15,31 +15,20 @@ public class UserDao {
         add(new User(4, "John", false));
     }};
 
-    public static void unBlockUser(int userId) {
+    public static void blockUser(int userId, boolean block) {
         users.stream()
                 .filter(v -> v.getId() == userId)
-                .forEach(User::unBlockUser);
-    }
-
-    public static void blockUser(int userId) {
-        users.stream()
-                .filter(v -> v.getId() == userId)
-                .forEach(User::blockUser);
+                .forEach(v -> v.blockUser(block));
     }
 
     public static List<User> getUsers() {
         return users;
     }
 
-    public static List<User> getBlockedUsersList() {
+    public static List<User> getBlockedUsersList(boolean block) {
         return getUsers().stream()
-                .filter(User::isBlocked)
+                .filter(v -> v.isBlocked() == block)
                 .collect(Collectors.toList());
     }
 
-    public static List<User> getUnBlockedUsersList() {
-        return getUsers().stream()
-                .filter(v -> !v.isBlocked())
-                .collect(Collectors.toList());
-    }
 }

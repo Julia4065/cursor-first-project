@@ -12,12 +12,8 @@ public class User {
         this.isBlocked = isBlocked;
     }
 
-    public void blockUser() {
-        isBlocked = true;
-    }
-
-    public void unBlockUser() {
-        isBlocked = false;
+    public void blockUser(boolean block) {
+        isBlocked = block;
     }
 
     public boolean isBlocked() {
@@ -26,10 +22,6 @@ public class User {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getId() {
