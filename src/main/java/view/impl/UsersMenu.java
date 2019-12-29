@@ -66,6 +66,10 @@ public class UsersMenu {
         if (input == 0) {
             return;
         }
-        UserService.blockUser(usersId.get(input), block);
+        try {
+            UserService.blockUser(usersId.get(input), block);
+        }catch (NullPointerException e){
+            System.out.println("User not found");
+        }
     }
 }
