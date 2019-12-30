@@ -4,20 +4,24 @@ public class User {
 
     private int id;
     private String name;
-    private boolean isBlocked;
+    private boolean blocked;
 
-    public User(int id, String name, boolean isBlocked) {
+    public User(int id, String name, boolean blocked) {
         this.id = id;
         this.name = name;
-        this.isBlocked = isBlocked;
+        this.blocked = blocked;
+    }
+
+    public User() {
+        super();
     }
 
     public void blockUser(boolean block) {
-        isBlocked = block;
+        blocked = block;
     }
 
     public boolean isBlocked() {
-        return isBlocked;
+        return blocked;
     }
 
     public String getName() {
@@ -33,7 +37,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", isBlocked=" + isBlocked +
+                ", isBlocked=" + blocked +
                 '}';
     }
 }

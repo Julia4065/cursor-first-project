@@ -9,14 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static dao.UserDao.users;
 
 public class UsersMenu {
     public void runMenu() {
-
-        for (model.User user : users) {
-            System.out.println(user.toString());
-        }
 
         int input = showMainMenu();
 
@@ -29,10 +24,6 @@ public class UsersMenu {
         } else if (input == 3) {
             //TODO Create massages
             System.out.println("Select user to sent the message");
-        }
-
-        for (model.User user : users) {
-            System.out.println(user.toString());
         }
     }
 
