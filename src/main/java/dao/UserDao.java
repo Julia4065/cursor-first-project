@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDao {
+    public static String usersJsonFile = "users.json";
 
     public static List<User> users = new ArrayList<User>() {{
         add(new User(1, "Ben", true));
@@ -27,11 +28,11 @@ public class UserDao {
         users.stream()
                 .filter(v -> v.getId() == userId)
                 .forEach(v -> v.blockUser(block));
-        writeJsonToFile(users, "users.json");
+        writeJsonToFile(users, usersJsonFile);
     }
 
     public static List<User> getUsers() {
-        return readJsonFile("users.json");
+        return readJsonFile(usersJsonFile);
     }
 
     public static List<User> getBlockedUsersList(boolean block) {
