@@ -25,7 +25,6 @@ public class UsersMenu {
     }
 
     public int showMainMenu() {
-        Map<String, ArrayList<String>> menuItems = new HashMap<>();
         System.out.println("Select menu item:");
         System.out.println("1. Block user");
         System.out.println("2. Unblock user");
