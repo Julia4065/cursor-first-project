@@ -60,7 +60,7 @@ public class UsersMenu {
         }
         UserDao userDao = new UserDao();
         users = userDao.getUsersListByBlockedStatus(!block);
-        Map<Integer, Integer> usersId = new HashMap<>();
+        var usersId = new HashMap<Integer, Integer>();
         for (int i = 1; i <= users.size(); i++) {
             System.out.println(i + ". " + users.get(i - 1).getName());
             usersId.put(i, users.get(i - 1).getId());
