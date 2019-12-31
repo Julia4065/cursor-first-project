@@ -9,19 +9,18 @@ import model.User;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDao {
     public String usersJsonFile = "users.json";
 
-    public List<User> users = new ArrayList<>() {{
-        add(new User(1, "Ben", true));
-        add(new User(2, "Alice", true));
-        add(new User(3, "Bill", false));
-        add(new User(4, "John", false));
-    }};
+    public List<User> users = List.of(
+            new User(1, "Ben", true),
+            new User(2, "Alice", true),
+            new User(3, "Bill", false),
+            new User(4, "John", false)
+    );
 
     public void changeUserBlockStatus(int userId, boolean block) {
         List<User> users = getUsers();
@@ -63,7 +62,8 @@ public class UserDao {
     private List<User> readJsonFile(String jsonFile) {
         List<User> users = null;
         try {
-            users = new ObjectMapper().readValue(new File(jsonFile), new TypeReference<>() {});
+            users = new ObjectMapper().readValue(new File(jsonFile), new TypeReference<>() {
+            });
         } catch (IOException e) {
             System.out.println("Can not read data from " + jsonFile);
         }
