@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDao {
-    public static String usersJsonFile = "users.json";
+    public String usersJsonFile = "users.json";
 
-    public static List<User> users = new ArrayList<User>() {{
+    public List<User> users = new ArrayList<>() {{
         add(new User(1, "Ben", true));
         add(new User(2, "Alice", true));
         add(new User(3, "Bill", false));
         add(new User(4, "John", false));
     }};
 
-    public static void blockUser(int userId, boolean block) {
+    public void blockUser(int userId, boolean block) {
         List<User> users = getUsers();
         users.stream()
                 .filter(v -> v.getId() == userId)
@@ -31,17 +31,17 @@ public class UserDao {
         writeJsonToFile(users, usersJsonFile);
     }
 
-    public static List<User> getUsers() {
+    public List<User> getUsers() {
         return readJsonFile(usersJsonFile);
     }
 
-    public static List<User> getBlockedUsersList(boolean block) {
+    public List<User> getBlockedUsersList(boolean block) {
         return getUsers().stream()
                 .filter(v -> v.isBlocked() == block)
                 .collect(Collectors.toList());
     }
 
-    public static void writeJsonToFile(List<User> jsonString, String jsonFile) {
+    public void writeJsonToFile(List<User> jsonString, String jsonFile) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         String arrayToJson;
@@ -60,11 +60,10 @@ public class UserDao {
         }
     }
 
-    public static List<User> readJsonFile(String jsonFile) {
+    private List<User> readJsonFile(String jsonFile) {
         List<User> users = null;
         try {
-            users = new ObjectMapper().readValue(new File(jsonFile), new TypeReference<List<User>>() {
-            });
+            users = new ObjectMapper().readValue(new File(jsonFile), new TypeReference<>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }

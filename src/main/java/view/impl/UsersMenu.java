@@ -4,10 +4,7 @@ import dao.UserDao;
 import model.User;
 import service.UserService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class UsersMenu {
@@ -28,6 +25,7 @@ public class UsersMenu {
     }
 
     public int showMainMenu() {
+        Map<String, ArrayList<String>> menuItems = new HashMap<>();
         System.out.println("Select menu item:");
         System.out.println("1. Block user");
         System.out.println("2. Unblock user");
@@ -45,7 +43,8 @@ public class UsersMenu {
         } else {
             System.out.println("Select user to unblock");
         }
-        users = UserDao.getBlockedUsersList(!block);
+        UserDao userDao = new UserDao();
+        users = userDao.getBlockedUsersList(!block);
         Map<Integer, Integer> usersId = new HashMap<>();
         for (int i = 1; i <= users.size(); i++) {
             System.out.println(i + ". " + users.get(i - 1).getName());
@@ -58,7 +57,8 @@ public class UsersMenu {
             return;
         }
         try {
-            UserService.blockUser(usersId.get(input), block);
+            UserService userService = new UserService();
+            userService.blockUser(usersId.get(input), block);
             if (block) {
                 System.out.println(users.get(input - 1).getName() + " blocked successful");
             } else {

@@ -4,7 +4,8 @@ import dao.UserDao;
 
 public class UserService {
 
-    public static void blockUser(int userId, boolean block) {
-        UserDao.blockUser(userId, block);
+    public void blockUser(int userId, boolean block) {
+        UserDao userDao = new UserDao();
+        userDao.blockUser(userId, block);
     }
 }
