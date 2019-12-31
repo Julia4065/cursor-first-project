@@ -47,13 +47,13 @@ public class UserDao {
         String arrayToJson;
         try {
             arrayToJson = objectMapper.writeValueAsString(jsonString);
-            FileWriter file;
             try {
+                FileWriter file;
                 file = new FileWriter(jsonFile);
                 file.write(arrayToJson);
                 file.flush();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Can not write data to " + jsonFile);
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class UserDao {
         try {
             users = new ObjectMapper().readValue(new File(jsonFile), new TypeReference<>() {});
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Can not read data from " + jsonFile);
         }
         return users;
     }
