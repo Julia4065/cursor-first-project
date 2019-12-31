@@ -59,7 +59,7 @@ public class UsersMenu {
             System.out.println("Select user to unblock");
         }
         UserDao userDao = new UserDao();
-        users = userDao.getBlockedUsersList(!block);
+        users = userDao.getUsersListByBlockedStatus(!block);
         Map<Integer, Integer> usersId = new HashMap<>();
         for (int i = 1; i <= users.size(); i++) {
             System.out.println(i + ". " + users.get(i - 1).getName());

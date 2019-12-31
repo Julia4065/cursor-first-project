@@ -23,7 +23,7 @@ public class UserDao {
         add(new User(4, "John", false));
     }};
 
-    public void blockUser(int userId, boolean block) {
+    public void changeUserBlockStatus(int userId, boolean block) {
         List<User> users = getUsers();
         users.stream()
                 .filter(v -> v.getId() == userId)
@@ -35,7 +35,7 @@ public class UserDao {
         return readJsonFile(usersJsonFile);
     }
 
-    public List<User> getBlockedUsersList(boolean block) {
+    public List<User> getUsersListByBlockedStatus(boolean block) {
         return getUsers().stream()
                 .filter(v -> v.isBlocked() == block)
                 .collect(Collectors.toList());

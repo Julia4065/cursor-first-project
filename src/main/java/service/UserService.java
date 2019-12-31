@@ -6,6 +6,6 @@ public class UserService {
 
     public void blockUser(int userId, boolean block) {
         UserDao userDao = new UserDao();
-        userDao.blockUser(userId, block);
+        userDao.changeUserBlockStatus(userId, block);
     }
 }
