@@ -8,28 +8,41 @@ import java.util.*;
 
 
 public class UsersMenu {
+    final static int BLOCK_USER_CODE = 1;
+    final static String BLOCK_USER_TEXT = "Block user";
+    final static int UNBLOCK_USER_CODE = 2;
+    final static String UNBLOCK_USER_TEXT = "Unblock user";
+    final static int PRIVATE_MESSAGE_CODE = 3;
+    final static String PRIVATE_MESSAGE_TEXT = "Private message";
+    final static int EXIT_CODE = 0;
+    final static String EXIT_TEXT = "To exit";
+
     public void runMenu() {
 
         int input = showMainMenu();
 
-        if (input == 0) {
-            return;
-        } else if (input == 1) {
-            blockUsersMenu(true);
-        } else if (input == 2) {
-            blockUsersMenu(false);
-        } else if (input == 3) {
-            //TODO Create massages
-            System.out.println("Select user to sent the message");
+        switch (input) {
+            case BLOCK_USER_CODE:
+                blockUsersMenu(true);
+                break;
+            case UNBLOCK_USER_CODE:
+                blockUsersMenu(false);
+                break;
+            case PRIVATE_MESSAGE_CODE:
+                //TODO Create massages
+                System.out.println("Select user to sent the message");
+                break;
+            default:
+                break;
         }
     }
 
     public int showMainMenu() {
         System.out.println("Select menu item:");
-        System.out.println("1. Block user");
-        System.out.println("2. Unblock user");
-        System.out.println("3. Private message");
-        System.out.println("0. To exit");
+        System.out.println(BLOCK_USER_CODE + ". " + BLOCK_USER_TEXT);
+        System.out.println(UNBLOCK_USER_CODE + ". " + UNBLOCK_USER_TEXT);
+        System.out.println(PRIVATE_MESSAGE_CODE + ". " + PRIVATE_MESSAGE_TEXT);
+        System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
 
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -49,10 +62,10 @@ public class UsersMenu {
             System.out.println(i + ". " + users.get(i - 1).getName());
             usersId.put(i, users.get(i - 1).getId());
         }
-        System.out.println("0. To exit");
+        System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
         Scanner scanner = new Scanner(System.in);
         int input = scanner.nextInt();
-        if (input == 0) {
+        if (input == EXIT_CODE) {
             return;
         }
         try {
