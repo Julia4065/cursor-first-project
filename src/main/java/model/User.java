@@ -12,10 +12,6 @@ public class User {
         this.blocked = blocked;
     }
 
-    public User() {
-        super();
-    }
-
     public void blockUser(boolean block) {
         blocked = block;
     }
