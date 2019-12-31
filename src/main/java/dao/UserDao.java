@@ -41,7 +41,7 @@ public class UserDao {
                 .collect(Collectors.toList());
     }
 
-    public void writeJsonToFile(List<User> jsonString, String jsonFile) {
+    private void writeJsonToFile(List<User> jsonString, String jsonFile) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         String arrayToJson;
