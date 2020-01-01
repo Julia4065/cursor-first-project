@@ -12,7 +12,7 @@ public class User {
         this.blocked = blocked;
     }
 
-    public void blockUser(boolean block) {
+    public void setUserStatus(boolean block) {
         blocked = block;
     }
 

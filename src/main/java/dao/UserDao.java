@@ -18,7 +18,7 @@ public class UserDao {
         List<User> users = getUsers();
         users.stream()
                 .filter(v -> v.getId() == userId)
-                .forEach(v -> v.blockUser(block));
+                .forEach(v -> v.setUserStatus(block));
     }
 
     public List<User> getUsers() {

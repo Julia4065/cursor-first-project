@@ -72,7 +72,7 @@ public class UsersMenu {
         }
         try {
             UserService userService = new UserService();
-            userService.blockUser(usersId.get(input), block);
+            userService.setUserStatus(usersId.get(input), block);
             if (block) {
                 System.out.println(users.get(input - 1).getName() + " blocked successful");
             } else {

@@ -4,7 +4,7 @@ import dao.UserDao;
 
 public class UserService {
 
-    public void blockUser(int userId, boolean block) {
+    public void setUserStatus(int userId, boolean block) {
         UserDao userDao = new UserDao();
         userDao.changeUserBlockStatus(userId, block);
     }
