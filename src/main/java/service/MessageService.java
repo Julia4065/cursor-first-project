@@ -1,10 +1,10 @@
 package service;
 
-import model.Message;
+import dao.MessageDao;
 
 public class MessageService {
-    public int sendMessage(int receiverUserId, String text){
-        messages.put(new Message(receiverUserId, text));
-        return Message.getMessageId();
+    public void sendMessage(int receiverUserId, String text) {
+        MessageDao messageDao = new MessageDao();
+        messageDao.sendMessage(receiverUserId, text);
     }
 }

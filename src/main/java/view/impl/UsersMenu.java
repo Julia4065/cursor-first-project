@@ -2,10 +2,12 @@ package view.impl;
 
 import dao.UserDao;
 import model.User;
+import service.MessageService;
 import service.UserService;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -21,7 +23,7 @@ public class UsersMenu {
 
     public void runMenu() {
 
-        int input = showMainMenu();
+        int input = showUsersMenu();
 
         switch (input) {
             case BLOCK_USER_CODE:
@@ -31,23 +33,21 @@ public class UsersMenu {
                 blockUsersMenu(false);
                 break;
             case PRIVATE_MESSAGE_CODE:
-                //TODO Create massages
-                System.out.println("Select user to sent the message");
+                sendMessageMenu();
                 break;
             default:
                 break;
         }
     }
 
-    public int showMainMenu() {
+    public int showUsersMenu() {
         System.out.println("Select menu item:");
         System.out.println(BLOCK_USER_CODE + ". " + BLOCK_USER_TEXT);
         System.out.println(UNBLOCK_USER_CODE + ". " + UNBLOCK_USER_TEXT);
         System.out.println(PRIVATE_MESSAGE_CODE + ". " + PRIVATE_MESSAGE_TEXT);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
 
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return Integer.parseInt(getInput());
     }
 
     public void blockUsersMenu(boolean block) {
@@ -59,14 +59,9 @@ public class UsersMenu {
         }
         UserDao userDao = new UserDao();
         users = userDao.getUsersListByBlockedStatus(!block);
-        var usersId = new HashMap<Integer, Integer>();
-        for (int i = 1; i <= users.size(); i++) {
-            System.out.println(i + ". " + users.get(i - 1).getName());
-            usersId.put(i, users.get(i - 1).getId());
-        }
+        Map<Integer, Integer> usersId = printUsersList(users);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
-        Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
+        int input = Integer.parseInt(getInput());
         if (input == EXIT_CODE) {
             return;
         }
@@ -81,5 +76,40 @@ public class UsersMenu {
         } catch (NullPointerException e) {
             System.out.println("User not found");
         }
+    }
+
+    public void sendMessageMenu() {
+        System.out.println("Select user");
+        UserDao userDao = new UserDao();
+        List<User> users = userDao.getUsers();
+        Map<Integer, Integer> usersId = printUsersList(users);
+        System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
+        int input = Integer.parseInt(getInput());
+        if (input == EXIT_CODE) {
+            return;
+        }
+        System.out.println("Type the message");
+        String messageText = getInput();
+        try {
+            MessageService messageService = new MessageService();
+            messageService.sendMessage(usersId.get(input), messageText);
+            System.out.println("Message was send to " + users.get(input - 1).getName());
+        } catch (NullPointerException e) {
+            System.out.println("User not found");
+        }
+    }
+
+    public Map<Integer, Integer> printUsersList(List<User> users) {
+        var usersId = new HashMap<Integer, Integer>();
+        for (int i = 1; i <= users.size(); i++) {
+            System.out.println(i + ". " + users.get(i - 1).getName());
+            usersId.put(i, users.get(i - 1).getId());
+        }
+        return usersId;
+    }
+
+    public String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next();
     }
 }

@@ -2,17 +2,18 @@ package dao;
 
 import model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDao {
 
-    private List<User> users = List.of(
+    private List<User> users = new ArrayList<>(List.of(
             new User(1, "Ben", true),
             new User(2, "Alice", true),
             new User(3, "Bill", false),
             new User(4, "John", false)
-    );
+    ));
 
     public void changeUserBlockStatus(int userId, boolean block) {
         List<User> users = getUsers();
