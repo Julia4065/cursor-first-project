@@ -11,7 +11,7 @@ public class MessageDao {
             new Message(1, "Hi Ben!"),
             new Message(2, "Hello Alice"),
             new Message(3, "Thanks Bill"),
-            new Message(4, "Buy John")
+            new Message(4, "Bye John")
     ));
 
     public List<Message> getMessages() {
