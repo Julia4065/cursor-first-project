@@ -47,7 +47,8 @@ public class UsersMenu {
         System.out.println(PRIVATE_MESSAGE_CODE + ". " + PRIVATE_MESSAGE_TEXT);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
 
-        return Integer.parseInt(getInput());
+        var scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.next());
     }
 
     public void blockUsersMenu(boolean block) {
@@ -61,7 +62,8 @@ public class UsersMenu {
         users = userDao.getUsersListByBlockedStatus(!block);
         Map<Integer, Integer> usersId = printUsersList(users);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
-        int input = Integer.parseInt(getInput());
+        var scanner = new Scanner(System.in);
+        int input = Integer.parseInt(scanner.next());
         if (input == EXIT_CODE) {
             return;
         }
@@ -85,12 +87,13 @@ public class UsersMenu {
         List<User> users = userDao.getUsers();
         Map<Integer, Integer> usersId = printUsersList(users);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
-        int input = Integer.parseInt(getInput());
+        var scanner = new Scanner(System.in);
+        int input = Integer.parseInt(scanner.next());
         if (input == EXIT_CODE) {
             return;
         }
         System.out.println("Type the message");
-        String messageText = getInput();
+        String messageText = scanner.next();
         Integer userId = usersId.get(input);
         if (userId != null) {
             var messageService = new MessageService();
@@ -108,10 +111,5 @@ public class UsersMenu {
             usersId.put(i, users.get(i - 1).getId());
         }
         return usersId;
-    }
-
-    public String getInput() {
-        var scanner = new Scanner(System.in);
-        return scanner.next();
     }
 }
