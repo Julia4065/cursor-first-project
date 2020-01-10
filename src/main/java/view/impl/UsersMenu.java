@@ -57,7 +57,7 @@ public class UsersMenu {
         } else {
             System.out.println("Select user to unblock");
         }
-        UserDao userDao = new UserDao();
+        var userDao = new UserDao();
         users = userDao.getUsersListByBlockedStatus(!block);
         Map<Integer, Integer> usersId = printUsersList(users);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
@@ -66,7 +66,7 @@ public class UsersMenu {
             return;
         }
         try {
-            UserService userService = new UserService();
+            var userService = new UserService();
             userService.setUserStatus(usersId.get(input), block);
             if (block) {
                 System.out.println(users.get(input - 1).getName() + " blocked successful");
@@ -80,7 +80,7 @@ public class UsersMenu {
 
     public void sendMessageMenu() {
         System.out.println("Select user");
-        UserDao userDao = new UserDao();
+        var userDao = new UserDao();
         List<User> users = userDao.getUsers();
         Map<Integer, Integer> usersId = printUsersList(users);
         System.out.println(EXIT_CODE + ". " + EXIT_TEXT);
@@ -91,7 +91,7 @@ public class UsersMenu {
         System.out.println("Type the message");
         String messageText = getInput();
         try {
-            MessageService messageService = new MessageService();
+            var messageService = new MessageService();
             messageService.sendMessage(usersId.get(input), messageText);
             System.out.println("Message was send to " + users.get(input - 1).getName());
         } catch (NullPointerException e) {
@@ -109,7 +109,7 @@ public class UsersMenu {
     }
 
     public String getInput() {
-        Scanner scanner = new Scanner(System.in);
+        var scanner = new Scanner(System.in);
         return scanner.next();
     }
 }

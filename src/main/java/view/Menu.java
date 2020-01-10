@@ -21,7 +21,7 @@ public class Menu {
         System.out.println(USER_PRODUCT_MENU_CODE + ". " + USER_PRODUCT_MENU_TEXT);
         System.out.println(USERS_MENU_CODE + ". " + USERS_MENU_TEXT);
 
-        Scanner scanner = new Scanner(System.in);
+        var scanner = new Scanner(System.in);
         int input = scanner.nextInt();
 
         switch (input) {
@@ -35,7 +35,7 @@ public class Menu {
                 //TODO User Product Menu
                 break;
             case USERS_MENU_CODE:
-                UsersMenu usersMenu = new UsersMenu();
+                var usersMenu = new UsersMenu();
                 usersMenu.runMenu();
                 break;
             default:
