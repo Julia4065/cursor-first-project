@@ -65,15 +65,16 @@ public class UsersMenu {
         if (input == EXIT_CODE) {
             return;
         }
-        try {
+        Integer userId = usersId.get(input);
+        if (userId != null) {
             var userService = new UserService();
-            userService.setUserStatus(usersId.get(input), block);
+            userService.setUserStatus(userId, block);
             if (block) {
                 System.out.println(users.get(input - 1).getName() + " blocked successful");
             } else {
                 System.out.println(users.get(input - 1).getName() + " unblocked successful");
             }
-        } catch (NullPointerException e) {
+        } else {
             System.out.println("User not found");
         }
     }
@@ -90,11 +91,12 @@ public class UsersMenu {
         }
         System.out.println("Type the message");
         String messageText = getInput();
-        try {
+        Integer userId = usersId.get(input);
+        if (userId != null) {
             var messageService = new MessageService();
-            messageService.sendMessage(usersId.get(input), messageText);
+            messageService.sendMessage(userId, messageText);
             System.out.println("Message was send to " + users.get(input - 1).getName());
-        } catch (NullPointerException e) {
+        } else {
             System.out.println("User not found");
         }
     }
