@@ -1,6 +1,6 @@
 package view.impl;
 
-import dao.UserDao;
+import dao.impl.UserDao;
 import model.User;
 import service.MessageService;
 import service.UserService;
