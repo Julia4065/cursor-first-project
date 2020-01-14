@@ -1,5 +1,6 @@
 package view;
 
+import view.impl.UserProductMenu;
 import view.impl.UsersMenu;
 
 import java.util.Scanner;
@@ -32,7 +33,8 @@ public class Menu {
                 //TODO User Main Menu
                 break;
             case USER_PRODUCT_MENU_CODE:
-                //TODO User Product Menu
+                var productMenu = new UserProductMenu();
+                productMenu.operateWithProductMenu();
                 break;
             case USERS_MENU_CODE:
                 var usersMenu = new UsersMenu();

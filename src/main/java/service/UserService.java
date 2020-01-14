@@ -1,6 +1,6 @@
 package service;
 
-import dao.UserDao;
+import dao.impl.UserDao;
 
 public class UserService {
 
