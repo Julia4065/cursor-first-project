@@ -33,8 +33,6 @@ public class Product {
     }
 
 
-    public enum ProductGroup {
-        TABLETS, LAPTOPS, SMARTPHONES, TV, APPLIANCES
-    }
+
 
 }
